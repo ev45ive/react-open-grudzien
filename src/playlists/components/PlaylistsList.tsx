@@ -5,19 +5,18 @@ import { Playlist } from '../../core/model/Playlist'
 interface Props {
   playlists: Playlist[],
   onSelected: (playlist_id: Playlist['id']) => void
+  selected?: Playlist['id'] | null
 }
 
 interface State {
-  selected?: Playlist['id'] | null
 }
 
 export default class PlaylistsList extends Component<Props, State> {
   state: State = {
-    selected: null
   }
 
   select = (selected: Playlist['id']) => {
-    this.setState({ selected })
+    // this.setState({ selected })
     this.props.onSelected(selected)
   }
 
@@ -31,7 +30,7 @@ export default class PlaylistsList extends Component<Props, State> {
             // <ListItem key={playlist.id} playlist={playlist} index={index}/>
 
             <div className={
-              `list-group-item ${this.state.selected === playlist.id ? 'active' : ''}`}
+              `list-group-item ${this.props.selected === playlist.id ? 'active' : ''}`}
               onClick={() => this.select(playlist.id)}
 
               key={playlist.id}>

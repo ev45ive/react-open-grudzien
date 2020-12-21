@@ -56,17 +56,19 @@ export default class PlaylistsView extends Component<Props, State> {
     return (
       <div>
         {/* .row>.col>PlaylistList^.col>PlaylistDetails+PlaylistForm */}
+
         <div className="row">
           <div className="col">
             <PlaylistsList
               playlists={this.state.playlists}
-
+              selected={this.state.selected && this.state.selected.id}
               onSelected={playlist_id => this.select(playlist_id)}
             />
-            {/* <input type="text"
-               value={this.state.selected.name}
-               onChange={ event => ....}
-            /> */}
+            <PlaylistsList
+              playlists={this.state.playlists}
+              selected={this.state.selected?.id}
+              onSelected={playlist_id => this.select(playlist_id)}
+            />
           </div>
           <div className="col">
 
@@ -76,7 +78,8 @@ export default class PlaylistsView extends Component<Props, State> {
             }
             
             {this.state.selected && <PlaylistForm></PlaylistForm>}
-            
+
+            {!this.state.selected && <p>Please select playlist</p>}
           </div>
         </div>
       </div>
