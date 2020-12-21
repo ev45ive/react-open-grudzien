@@ -32,20 +32,29 @@ export default class PlaylistForm extends Component<Props, State> {
 
     // this.state.playlist.name = event.target.value
     // this.setState({})
-
-    this.setState({
-      playlist: {
-        ...this.state.playlist,
-        name: event.target.value
-      }
-    })
-
-    this.setState({
-      counter: this.state.playlist.name.length
-    })
+    console.log('before ss1')
+    this.setState((prevState) => {
+      console.log(' ss1')
+      return ({
+        playlist: {
+          ...prevState.playlist,
+          name: event.target.value
+        }
+      })
+    }, () => console.log('after ss1'))
+    
+    console.log('before ss2')
+    this.setState((prevState) => {
+      console.log('ss2')
+      return ({
+        // counter: this.state.playlist.name.length
+        counter: prevState.playlist.name.length
+      })
+    }, () => console.log('after ss2'))
   }
 
   render() {
+    console.log('render')
     const { playlist } = this.state
 
     return (
