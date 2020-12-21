@@ -64,7 +64,13 @@ export default class PlaylistsView extends Component<Props, State> {
 
   edit = () => { this.setState({ mode: 'edit' }) }
   cancel = () => { this.setState({ mode: 'details' }) }
-  save = () => { this.setState({ mode: 'details' }) }
+  save = (draft: Playlist) => {
+    this.setState({
+      playlists: this.state.playlists.map(p => p.id === draft.id ? draft : p),
+      selected: draft,
+      mode: 'details'
+    })
+  }
 
   render() {
     return (
