@@ -5,14 +5,18 @@ import { Playlist } from '../../core/model/Playlist'
 interface Props {
   playlists: Playlist[]
 }
-interface State {
 
+interface State {
+  selected?: Playlist['id'] | null
 }
 
 export default class PlaylistsList extends Component<Props, State> {
-  state = {}
-  select = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    // event.nativeEvent
+  state: State = {
+    selected: null
+  }
+
+  select = (selected: Playlist['id']) => {
+    this.setState({ selected })
   }
 
   render() {
@@ -24,7 +28,11 @@ export default class PlaylistsList extends Component<Props, State> {
           {this.props.playlists.map((playlist, index) =>
             // <ListItem key={playlist.id} playlist={playlist} index={index}/>
 
-            <div className="list-group-item" key={playlist.id}>
+            <div className={
+              `list-group-item ${this.state.selected === playlist.id ? 'active' : ''}`}
+              onClick={() => this.select(playlist.id)}
+
+              key={playlist.id}>
               <span>{index + 1}. {playlist.name}</span>
             </div>
           )}
