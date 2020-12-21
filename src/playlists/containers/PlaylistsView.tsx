@@ -9,15 +9,14 @@ import PlaylistsList from '../components/PlaylistsList'
 interface Props {
 
 }
+
 interface State {
-  selected: Playlist
   playlists: Playlist[]
+  selected?: Playlist
 }
 
-
-
 export default class PlaylistsView extends Component<Props, State> {
-  state = {
+  state: State = {
     playlists: [
       {
         id: 123,
@@ -39,12 +38,18 @@ export default class PlaylistsView extends Component<Props, State> {
       },
     ],
 
-    selected: {
-      id: 123,
-      name: 'Playlist',
-      public: true,
-      description: 'My playlist'
-    }
+    // selected: {
+    //   id: 123,
+    //   name: 'Playlist',
+    //   public: true,
+    //   description: 'My playlist'
+    // }
+  }
+
+  select(selectedId: Playlist['id']) {
+    this.setState({
+      selected: this.state.playlists.find(p => p.id == selectedId)
+    })
   }
 
   render() {
@@ -53,11 +58,25 @@ export default class PlaylistsView extends Component<Props, State> {
         {/* .row>.col>PlaylistList^.col>PlaylistDetails+PlaylistForm */}
         <div className="row">
           <div className="col">
-            <PlaylistsList playlists={this.state.playlists}></PlaylistsList>
+            <PlaylistsList
+              playlists={this.state.playlists}
+
+              onSelected={playlist_id => this.select(playlist_id)}
+            />
+            {/* <input type="text"
+               value={this.state.selected.name}
+               onChange={ event => ....}
+            /> */}
           </div>
           <div className="col">
-            <PlaylistDetails playlist={this.state.selected}></PlaylistDetails>
-            <PlaylistForm></PlaylistForm>
+
+            {this.state.selected ?
+              <PlaylistDetails playlist={this.state.selected}></PlaylistDetails>
+              : null
+            }
+            
+            {this.state.selected && <PlaylistForm></PlaylistForm>}
+            
           </div>
         </div>
       </div>

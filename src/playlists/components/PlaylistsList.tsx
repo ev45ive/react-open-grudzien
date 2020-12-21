@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
-  playlists: Playlist[]
+  playlists: Playlist[],
+  onSelected: (playlist_id: Playlist['id']) => void
 }
 
 interface State {
@@ -17,6 +18,7 @@ export default class PlaylistsList extends Component<Props, State> {
 
   select = (selected: Playlist['id']) => {
     this.setState({ selected })
+    this.props.onSelected(selected)
   }
 
   render() {
