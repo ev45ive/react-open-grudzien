@@ -13,12 +13,14 @@ interface Props {
 interface State {
   playlists: Playlist[]
   selected?: Playlist
-  mode: 'details' | 'edit'
+  mode: 'details' | 'edit',
+  query: string
 }
 
 export default class PlaylistsView extends Component<Props, State> {
   state: State = {
     mode: 'details',
+    query: '',
     playlists: [
       {
         id: 123,
@@ -56,6 +58,10 @@ export default class PlaylistsView extends Component<Props, State> {
     })
   }
 
+  updateQuery = (query: string) => {
+    this.setState({ query })
+  }
+
   edit = () => { this.setState({ mode: 'edit' }) }
   cancel = () => { this.setState({ mode: 'details' }) }
   save = () => { this.setState({ mode: 'details' }) }
@@ -67,6 +73,7 @@ export default class PlaylistsView extends Component<Props, State> {
 
         <div className="row">
           <div className="col">
+            <input type="text" className="form-control mb-2" value={this.state.query} onChange={e => this.updateQuery(e.target.value)} />
             <PlaylistsList
               playlists={this.state.playlists}
               selected={this.state.selected && this.state.selected.id}
@@ -79,8 +86,8 @@ export default class PlaylistsView extends Component<Props, State> {
 
               {this.state.mode === 'details' &&
                 <PlaylistDetails playlist={this.state.selected} onEdit={this.edit} />}
-                
-              {this.state.mode === 'edit' && 
+
+              {this.state.mode === 'edit' &&
                 <PlaylistForm playlist={this.state.selected} onCancel={this.cancel} onSave={this.save} />}
 
             </div>}

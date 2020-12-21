@@ -45,10 +45,17 @@ export default class PlaylistForm extends Component<Props, State> {
     }
   }
 
+  shouldComponentUpdate(nextProps: Props, nextState: State) {
+    return this.props.playlist !== nextProps.playlist || this.state.playlist !== nextState.playlist
+  }
+
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 
     this.setState((prevState, props) => {
-      console.log(event)
+      // console.log(event)
+      // USE IMMUTABLE OBJECTS FOR FASTER UPDATES! (shouldComponentUpdate())
+      // this.state.playlist.name = event.target.name;
+      // return {}
       return ({
         playlist: {
           ...prevState.playlist,
