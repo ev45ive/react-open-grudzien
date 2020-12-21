@@ -50,7 +50,7 @@ export default class PlaylistsView extends Component<Props, State> {
     // }
   }
 
-  select(selectedId: Playlist['id']) {
+  select = (selectedId: Playlist['id']) => {
     this.setState({
       selected:
         selectedId === this.state.selected?.id ? undefined :
@@ -77,7 +77,7 @@ export default class PlaylistsView extends Component<Props, State> {
             <PlaylistsList
               playlists={this.state.playlists}
               selected={this.state.selected && this.state.selected.id}
-              onSelected={playlist_id => this.select(playlist_id)}
+              onSelected={this.select}
             />
           </div>
           <div className="col">
