@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
@@ -15,7 +15,7 @@ interface State {
 
 
 
-export default class PlaylistForm extends Component<Props, State> {
+export default class PlaylistForm extends PureComponent<Props, State> {
   state: State = {
     playlist: {
       id: 123,
@@ -45,9 +45,9 @@ export default class PlaylistForm extends Component<Props, State> {
     }
   }
 
-  shouldComponentUpdate(nextProps: Props, nextState: State) {
-    return this.props.playlist !== nextProps.playlist || this.state.playlist !== nextState.playlist
-  }
+  // shouldComponentUpdate(nextProps: Props, nextState: State) {
+  //   return this.props.playlist !== nextProps.playlist || this.state.playlist !== nextState.playlist
+  // }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 

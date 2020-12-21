@@ -88,7 +88,7 @@ export default class PlaylistsView extends Component<Props, State> {
                 <PlaylistDetails playlist={this.state.selected} onEdit={this.edit} />}
 
               {this.state.mode === 'edit' &&
-                <PlaylistForm playlist={this.state.selected} onCancel={this.cancel} onSave={this.save} />}
+                <PlaylistForm playlist={this.state.selected} onCancel={this.cancel/* () => this.cancel() - NOT PURE */} onSave={this.save} />}
 
             </div>}
 
