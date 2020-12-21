@@ -1,6 +1,7 @@
 
 // tsrcc
 import React, { Component } from 'react'
+import { Playlist } from '../../core/model/Playlist'
 import { PlaylistDetails } from '../components/PlaylistDetails'
 import PlaylistForm from '../components/PlaylistForm'
 import PlaylistsList from '../components/PlaylistsList'
@@ -12,7 +13,7 @@ interface State {
   
 }
 
-const playlist = {
+const playlist:Playlist = {
   id: 123,
   name: 'Playlist',
   public: true,

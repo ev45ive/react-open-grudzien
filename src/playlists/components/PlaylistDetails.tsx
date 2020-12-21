@@ -1,13 +1,7 @@
 
 // tsrafc
 import React from 'react'
-
-interface Playlist {
-  id: number;
-  name: string;
-  public: boolean;
-  description: string;
-}
+import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
   playlist: Playlist
