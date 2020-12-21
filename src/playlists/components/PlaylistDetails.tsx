@@ -2,18 +2,20 @@
 // tsrafc
 import React from 'react'
 
-interface Props {
-
+interface Playlist {
+  id: number;
+  name: string;
+  public: boolean;
+  description: string;
 }
 
-const playlist = {
-  id: 123,
-  name: 'Playlist',
-  public: true,
-  description: 'My playlist'
+interface Props {
+  playlist: Playlist
 }
 
 export const PlaylistDetails = (props: Props) => {
+  const { playlist } = props;
+
   return (
     <div title={playlist.name} data-id={'playlist_' + playlist.id}>
       {/* dl>(dt+dd)*3 */}

@@ -12,6 +12,14 @@ interface State {
   
 }
 
+const playlist = {
+  id: 123,
+  name: 'Playlist',
+  public: true,
+  description: 'My playlist'
+}
+
+
 export default class PlaylistsView extends Component<Props, State> {
   state = {}
 
@@ -24,7 +32,7 @@ export default class PlaylistsView extends Component<Props, State> {
             <PlaylistsList></PlaylistsList>
           </div>
           <div className="col">
-            <PlaylistDetails></PlaylistDetails>
+            <PlaylistDetails playlist={playlist}></PlaylistDetails>
             <PlaylistForm></PlaylistForm>
           </div>
         </div>
