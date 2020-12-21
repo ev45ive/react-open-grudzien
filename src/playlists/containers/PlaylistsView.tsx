@@ -7,22 +7,45 @@ import PlaylistForm from '../components/PlaylistForm'
 import PlaylistsList from '../components/PlaylistsList'
 
 interface Props {
-  
+
 }
 interface State {
-  
+  selected: Playlist
+  playlists: Playlist[]
 }
 
-const playlist:Playlist = {
-  id: 123,
-  name: 'Playlist',
-  public: true,
-  description: 'My playlist'
-}
 
 
 export default class PlaylistsView extends Component<Props, State> {
-  state = {}
+  state = {
+    playlists: [
+      {
+        id: 123,
+        name: 'Playlist',
+        public: true,
+        description: 'My playlist'
+      },
+      {
+        id: 234,
+        name: 'Playlist 234',
+        public: false,
+        description: 'My playlist 234'
+      },
+      {
+        id: 345,
+        name: 'Playlist 354',
+        public: true,
+        description: 'My playlist 345'
+      },
+    ],
+
+    selected: {
+      id: 123,
+      name: 'Playlist',
+      public: true,
+      description: 'My playlist'
+    }
+  }
 
   render() {
     return (
@@ -30,10 +53,10 @@ export default class PlaylistsView extends Component<Props, State> {
         {/* .row>.col>PlaylistList^.col>PlaylistDetails+PlaylistForm */}
         <div className="row">
           <div className="col">
-            <PlaylistsList></PlaylistsList>
+            <PlaylistsList playlists={this.state.playlists}></PlaylistsList>
           </div>
           <div className="col">
-            <PlaylistDetails playlist={playlist}></PlaylistDetails>
+            <PlaylistDetails playlist={this.state.selected}></PlaylistDetails>
             <PlaylistForm></PlaylistForm>
           </div>
         </div>

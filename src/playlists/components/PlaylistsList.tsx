@@ -1,11 +1,12 @@
 
 import React, { Component } from 'react'
+import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
-  
+  playlists: Playlist[]
 }
 interface State {
-  
+
 }
 
 export default class PlaylistsList extends Component<Props, State> {
@@ -15,15 +16,20 @@ export default class PlaylistsList extends Component<Props, State> {
   }
 
   render() {
+
     return (
       <div>
-        {/* .list-group>.list-group-item*3>span{Text} */}
         <div className="list-group">
-          <div className="list-group-item" onClick={this.select}><span>Text</span></div>
-          <div className="list-group-item"><span>Text</span></div>
-          <div className="list-group-item"><span>Text</span></div>
+
+          {this.props.playlists.map((playlist, index) =>
+
+            <div className="list-group-item" key={playlist.id}>
+              <span>{index + 1}. {playlist.name}</span>
+            </div>
+          )}
+
         </div>
-        
+
       </div>
     )
   }
