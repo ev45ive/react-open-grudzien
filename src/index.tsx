@@ -4,69 +4,49 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-
-window.React = React;
-window.ReactDOM = ReactDOM;
-
-type Props = {
-  name: string;
-  color: string;
-  children: React.ReactNode[] | React.ReactNode
-};
-
-const PersonElem = (props: Props) => React.createElement('div', {
-  style: { color: props.color }
-},
-  props.name + " ma kota" + props.children + PersonItem({})
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
 );
-const PersonItem:React.FunctionComponent = (props) => <div>Item</div>
+
+// window.React = React;
+// window.ReactDOM = ReactDOM;
+
+// type Props = {
+//   name: string;
+//   color: string;
+//   children: React.ReactNode[] | React.ReactNode
+// };
+
+// const PersonElem = (props: Props) => React.createElement('div', {
+//   style: { color: props.color }
+// },
+//   props.name + " ma kota" + props.children + PersonItem({})
+// );
+// const PersonItem:React.FunctionComponent = (props) => <div>Item</div>
 
 
-const title = "title"
-const div = <div id="123" title={title + "!"}>
-  {/* {PersonElem({ color: 'red', name: "Asia" })} */}
-  <PersonElem name="Alice" color="red"> Placki <div>Test</div> </PersonElem>
-  <PersonElem name={'Bob'} color="red"> Placki <PersonItem>Test</PersonItem> </PersonElem>
+// const title = "title"
+// const div = <div id="123" title={title + "!"}>
+//   {/* {PersonElem({ color: 'red', name: "Asia" })} */}
+//   <PersonElem name="Alice" color="red"> Placki <div>Test</div> </PersonElem>
+//   <PersonElem name={'Bob'} color="red"> Placki <PersonItem>Test</PersonItem> </PersonElem>
 
-  <span title="placki" className="klasa" style={
-    {
-      color: 'red',
-      borderBottom: '1px solid red'
-    }
-  }></span>
-  i placki
-</div>;
-debugger
-
-ReactDOM.render(div, document.getElementById('root'))
-
-// const div = React.createElement('div', {},
-//   PersonElem({ color: 'red', name: "Asia" }),
-//   PersonElem({ color: 'blue', name: "Bob" }),
-//   PersonElem({ color: 'green', name: "Kate" }),
-// )
-
-// const div = React.createElement('div', { id: '123', title: 'test' },
-//   PersonElem({ color: 'red', name: "Asia" }),
-//   React.createElement('input'),
-//   React.createElement('span', {
-//     title: "placki",
-//     className: "klasa",
-//     style: {
+//   <span title="placki" className="klasa" style={
+//     {
 //       color: 'red',
 //       borderBottom: '1px solid red'
 //     }
-//   }, "i placki"),
-// )
+//   }></span>
+//   i placki
+// </div>;
+// debugger
+
+// ReactDOM.render(div, document.getElementById('root'))
 
 
-
-// ReactDOM.render(
-//   <React.StrictMode>
-//     <App />
-//   </React.StrictMode>,
-//   document.getElementById('root')
-// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
