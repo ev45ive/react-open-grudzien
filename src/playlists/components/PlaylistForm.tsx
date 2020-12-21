@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
-
+  playlist: Playlist
 }
 interface State {
   playlist: Playlist,
@@ -42,7 +42,7 @@ export default class PlaylistForm extends Component<Props, State> {
 
   render() {
     console.log('render')
-    const { playlist } = this.state
+    const { playlist } = this.props
 
     return (
       <div>

@@ -70,11 +70,11 @@ export default class PlaylistsView extends Component<Props, State> {
           <div className="col">
 
             {this.state.selected ?
-              <PlaylistDetails playlist={this.state.selected}></PlaylistDetails>
+              <PlaylistDetails playlist={this.state.  selected}/>
               : null
             }
 
-            {this.state.selected && <PlaylistForm></PlaylistForm>}
+            {this.state.selected && <PlaylistForm playlist={this.state.selected}/>}
 
             {!this.state.selected && <p>Please select playlist</p>}
           </div>
