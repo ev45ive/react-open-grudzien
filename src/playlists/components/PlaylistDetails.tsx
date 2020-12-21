@@ -5,9 +5,10 @@ import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
   playlist: Playlist
+  onEdit(): void
 }
 
-export const PlaylistDetails = ({ playlist }: Props) => {
+export const PlaylistDetails = ({ playlist, onEdit }: Props) => {
   // const { playlist } = props;
 
   return (
@@ -26,9 +27,9 @@ export const PlaylistDetails = ({ playlist }: Props) => {
         <dt>Description:</dt>
         <dd>{playlist.description}</dd>
       </dl>
-      
-      <button className="btn btn-info">Edit</button>
-        
+
+      <button className="btn btn-info" onClick={onEdit}>Edit</button>
+
     </div>
   )
 }

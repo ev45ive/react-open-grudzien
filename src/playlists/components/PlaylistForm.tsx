@@ -4,7 +4,10 @@ import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
   playlist: Playlist
+  onCancel(): void,
+  onSave(): void,
 }
+
 interface State {
   playlist: Playlist,
   counter: number
@@ -29,16 +32,23 @@ export default class PlaylistForm extends Component<Props, State> {
 
   nameInputRef = React.createRef<HTMLInputElement>()
 
-  componentDidMount(){
-    if(this.nameInputRef.current){
+  componentDidMount() {
+    if (this.nameInputRef.current) {
       this.nameInputRef.current.focus()
     }
   }
 
+  static getDerivedStateFromProps(nextProps: Props, nextState: State) {
+    console.log('getDerivedStateFromProps')
+    return {
+      playlist: nextProps.playlist.id === nextState.playlist.id ? nextState.playlist : nextProps.playlist
+    }
+  }
+
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    
+
     this.setState((prevState, props) => {
-      console.log(event )
+      console.log(event)
       return ({
         playlist: {
           ...prevState.playlist,
@@ -73,9 +83,9 @@ export default class PlaylistForm extends Component<Props, State> {
           <textarea className="form-control" defaultValue={playlist.description}></textarea>
         </div>
 
-        <button className="btn btn-danger">Cancel</button>
-        
-        <button className="btn btn-success">Save</button>
+        <button className="btn btn-danger" onClick={this.props.onCancel}>Cancel</button>
+
+        <button className="btn btn-success" onClick={this.props.onSave}>Save</button>
 
       </div>
     )

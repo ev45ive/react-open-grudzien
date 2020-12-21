@@ -18,7 +18,7 @@ interface State {
 
 export default class PlaylistsView extends Component<Props, State> {
   state: State = {
-    mode:'details',
+    mode: 'details',
     playlists: [
       {
         id: 123,
@@ -56,6 +56,10 @@ export default class PlaylistsView extends Component<Props, State> {
     })
   }
 
+  edit = () => { this.setState({ mode: 'edit' }) }
+  cancel = () => { this.setState({ mode: 'details' }) }
+  save = () => { this.setState({ mode: 'details' }) }
+
   render() {
     return (
       <div>
@@ -71,12 +75,16 @@ export default class PlaylistsView extends Component<Props, State> {
           </div>
           <div className="col">
 
-            {this.state.selected ?
-              <PlaylistDetails playlist={this.state.  selected}/>
-              : null
-            }
+            {this.state.selected && <div>
 
-            {this.state.selected && <PlaylistForm playlist={this.state.selected}/>}
+              {this.state.mode === 'details' &&
+                <PlaylistDetails playlist={this.state.selected} onEdit={this.edit} />}
+                
+              {this.state.mode === 'edit' && 
+                <PlaylistForm playlist={this.state.selected} onCancel={this.cancel} onSave={this.save} />}
+
+            </div>}
+
 
             {!this.state.selected && <p>Please select playlist</p>}
           </div>
