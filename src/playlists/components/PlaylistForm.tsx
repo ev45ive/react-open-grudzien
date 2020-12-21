@@ -28,29 +28,16 @@ export default class PlaylistForm extends Component<Props, State> {
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value)
-
-    // this.state.playlist.name = event.target.value
-    // this.setState({})
-    console.log('before ss1')
-    this.setState((prevState) => {
-      console.log(' ss1')
+    
+    this.setState((prevState, props) => {
+      console.log(event )
       return ({
         playlist: {
           ...prevState.playlist,
           name: event.target.value
         }
       })
-    }, () => console.log('after ss1'))
-    
-    console.log('before ss2')
-    this.setState((prevState) => {
-      console.log('ss2')
-      return ({
-        // counter: this.state.playlist.name.length
-        counter: prevState.playlist.name.length
-      })
-    }, () => console.log('after ss2'))
+    })
   }
 
   render() {
@@ -64,8 +51,7 @@ export default class PlaylistForm extends Component<Props, State> {
           <label>Name:</label>
           <input type="text" className="form-control" value={playlist.name}
             onChange={this.handleChange} />
-          {/* {playlist.name.length} / 170 */}
-          {this.state.counter} / 170
+          {playlist.name.length} / 170
         </div>
 
         {/* .form-group>label>input[type=checkbox]+{ Public} */}
