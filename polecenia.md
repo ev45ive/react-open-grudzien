@@ -1,3 +1,11 @@
+# GIT 
+cd ..
+git clone https://bitbucket.org/ev45ive/react-open-grudzien.git react-open-grudzien
+cd react-open-grudzien
+npm i 
+npm start
+
+
 # Instalacje
 node -v
 npm -v 
