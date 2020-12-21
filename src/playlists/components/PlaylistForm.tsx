@@ -6,25 +6,25 @@ interface Props {
 
 }
 interface State {
-  playlist: Playlist
+  playlist: Playlist,
+  counter: number
 }
 
 
 
 export default class PlaylistForm extends Component<Props, State> {
-  state = {
+  state: State = {
     playlist: {
       id: 123,
       name: 'Playlist',
       public: true,
       description: 'My playlist'
-    }
+    },
+    counter: 0
   }
 
   constructor(props: Props) {
     super(props)
-    // this.handleChange = this.handleChange.bind(this)
-    // this.handleChange = (event) => this.handleChange(event)
   }
 
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +39,10 @@ export default class PlaylistForm extends Component<Props, State> {
         name: event.target.value
       }
     })
+
+    this.setState({
+      counter: this.state.playlist.name.length
+    })
   }
 
   render() {
@@ -49,20 +53,21 @@ export default class PlaylistForm extends Component<Props, State> {
         {/* .form-group>label{Name:}+input.form-control */}
         <div className="form-group">
           <label>Name:</label>
-          <input type="text" className="form-control" defaultValue={playlist.name}
+          <input type="text" className="form-control" value={playlist.name}
             onChange={this.handleChange} />
-          {playlist.name.length} / 170
+          {/* {playlist.name.length} / 170 */}
+          {this.state.counter} / 170
         </div>
 
         {/* .form-group>label>input[type=checkbox]+{ Public} */}
         <div className="form-group"><label>
-          <input type="checkbox" checked={playlist.public} /> Public</label>
+          <input type="checkbox" defaultChecked={playlist.public} /> Public</label>
         </div>
 
         {/* .form-group>label{Description:}+textarea.form-control */}
         <div className="form-group">
           <label>Description:</label>
-          <textarea className="form-control" value={playlist.description}></textarea>
+          <textarea className="form-control" defaultValue={playlist.description}></textarea>
         </div>
 
       </div>
