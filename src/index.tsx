@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -11,19 +11,40 @@ window.ReactDOM = ReactDOM;
 type Props = {
   name: string;
   color: string;
+  children: React.ReactNode[] | React.ReactNode
 };
 
 const PersonElem = (props: Props) => React.createElement('div', {
-    style: { color: props.color }
-  },
-  props.name + " ma kota"
+  style: { color: props.color }
+},
+  props.name + " ma kota" + props.children + PersonItem({})
 );
+const PersonItem:React.FunctionComponent = (props) => <div>Item</div>
 
-const div = React.createElement('div', {},
-  PersonElem({ color: 'red', name: "Asia" }),
-  PersonElem({ color: 'blue', name: "Bob" }),
-  PersonElem({ color: 'green', name: "Kate" }),
-)
+
+const title = "title"
+const div = <div id="123" title={title + "!"}>
+  {/* {PersonElem({ color: 'red', name: "Asia" })} */}
+  <PersonElem name="Alice" color="red"> Placki <div>Test</div> </PersonElem>
+  <PersonElem name={'Bob'} color="red"> Placki <PersonItem>Test</PersonItem> </PersonElem>
+
+  <span title="placki" className="klasa" style={
+    {
+      color: 'red',
+      borderBottom: '1px solid red'
+    }
+  }></span>
+  i placki
+</div>;
+debugger
+
+ReactDOM.render(div, document.getElementById('root'))
+
+// const div = React.createElement('div', {},
+//   PersonElem({ color: 'red', name: "Asia" }),
+//   PersonElem({ color: 'blue', name: "Bob" }),
+//   PersonElem({ color: 'green', name: "Kate" }),
+// )
 
 // const div = React.createElement('div', { id: '123', title: 'test' },
 //   PersonElem({ color: 'red', name: "Asia" }),
@@ -38,7 +59,7 @@ const div = React.createElement('div', {},
 //   }, "i placki"),
 // )
 
-ReactDOM.render(div, document.getElementById('root'))
+
 
 // ReactDOM.render(
 //   <React.StrictMode>
