@@ -48,7 +48,9 @@ export default class PlaylistsView extends Component<Props, State> {
 
   select(selectedId: Playlist['id']) {
     this.setState({
-      selected: this.state.playlists.find(p => p.id == selectedId)
+      selected:
+        selectedId === this.state.selected?.id ? undefined :
+          this.state.playlists.find(p => p.id === selectedId)
     })
   }
 
@@ -64,11 +66,6 @@ export default class PlaylistsView extends Component<Props, State> {
               selected={this.state.selected && this.state.selected.id}
               onSelected={playlist_id => this.select(playlist_id)}
             />
-            <PlaylistsList
-              playlists={this.state.playlists}
-              selected={this.state.selected?.id}
-              onSelected={playlist_id => this.select(playlist_id)}
-            />
           </div>
           <div className="col">
 
@@ -76,7 +73,7 @@ export default class PlaylistsView extends Component<Props, State> {
               <PlaylistDetails playlist={this.state.selected}></PlaylistDetails>
               : null
             }
-            
+
             {this.state.selected && <PlaylistForm></PlaylistForm>}
 
             {!this.state.selected && <p>Please select playlist</p>}
