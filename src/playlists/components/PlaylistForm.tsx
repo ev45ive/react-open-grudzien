@@ -27,6 +27,14 @@ export default class PlaylistForm extends Component<Props, State> {
     super(props)
   }
 
+  nameInputRef = React.createRef<HTMLInputElement>()
+
+  componentDidMount(){
+    if(this.nameInputRef.current){
+      this.nameInputRef.current.focus()
+    }
+  }
+
   handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     
     this.setState((prevState, props) => {
@@ -42,14 +50,14 @@ export default class PlaylistForm extends Component<Props, State> {
 
   render() {
     console.log('render')
-    const { playlist } = this.props
+    const { playlist } = this.state
 
     return (
       <div>
         {/* .form-group>label{Name:}+input.form-control */}
         <div className="form-group">
           <label>Name:</label>
-          <input type="text" className="form-control" value={playlist.name}
+          <input type="text" className="form-control" value={playlist.name} ref={this.nameInputRef}
             onChange={this.handleChange} />
           {playlist.name.length} / 170
         </div>
@@ -64,6 +72,9 @@ export default class PlaylistForm extends Component<Props, State> {
           <label>Description:</label>
           <textarea className="form-control" defaultValue={playlist.description}></textarea>
         </div>
+
+        <button className="btn btn-danger">Cancel</button>
+        <button className="btn btn-success">Save</button>
 
       </div>
     )
