@@ -74,6 +74,7 @@ export default class PlaylistForm extends Component<Props, State> {
         </div>
 
         <button className="btn btn-danger">Cancel</button>
+        
         <button className="btn btn-success">Save</button>
 
       </div>

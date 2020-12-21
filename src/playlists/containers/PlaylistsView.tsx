@@ -13,10 +13,12 @@ interface Props {
 interface State {
   playlists: Playlist[]
   selected?: Playlist
+  mode: 'details' | 'edit'
 }
 
 export default class PlaylistsView extends Component<Props, State> {
   state: State = {
+    mode:'details',
     playlists: [
       {
         id: 123,
