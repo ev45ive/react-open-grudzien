@@ -13,8 +13,8 @@ interface Props {
   playlist: Playlist
 }
 
-export const PlaylistDetails = (props: Props) => {
-  const { playlist } = props;
+export const PlaylistDetails = ({ playlist }: Props) => {
+  // const { playlist } = props;
 
   return (
     <div title={playlist.name} data-id={'playlist_' + playlist.id}>
