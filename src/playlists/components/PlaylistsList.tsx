@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react'
+import React, { Component, PureComponent } from 'react'
 import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
@@ -11,9 +11,8 @@ interface Props {
 interface State {
 }
 
-export default class PlaylistsList extends Component<Props, State> {
-  state: State = {
-  }
+export default class PlaylistsList extends PureComponent<Props, State> {
+  state: State = {}
 
   select = (selected: Playlist['id']) => {
     // this.setState({ selected })

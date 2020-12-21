@@ -8,12 +8,10 @@ interface Props {
   onEdit(): void
 }
 
-export const PlaylistDetails = ({ playlist, onEdit }: Props) => {
-  // const { playlist } = props;
+export const PlaylistDetails = React.memo(({ playlist, onEdit }: Props) => {
 
   return (
     <div title={playlist.name} data-id={'playlist_' + playlist.id}>
-      {/* dl>(dt+dd)*3 */}
       <dl>
         <dt>Name:</dt>
         <dd>{playlist.name}</dd>
@@ -32,4 +30,4 @@ export const PlaylistDetails = ({ playlist, onEdit }: Props) => {
 
     </div>
   )
-}
+}/* , propsAreEqual?: ((prevProps: Readonly<Props>, nextProps: Readonly<Props>) => boolean */)
