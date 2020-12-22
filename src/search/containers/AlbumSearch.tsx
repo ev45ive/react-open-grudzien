@@ -18,7 +18,6 @@ export const AlbumSearch = () => {
   const search = async (query: string) => {
     try {
       setError(null)
-      setQuery(query)
       setLoading(true)
       setResults([])
       const results = await albumSearch.searchAlbums(query)
@@ -31,25 +30,23 @@ export const AlbumSearch = () => {
   }
 
   useEffect(() => {
-    // search(query);
     console.log('useEffect', query)
-  }, [])
-  // })// after EACH render
-  // },[])// after FIRST render
-  // },[x,y])// after render when x or y Changed
+    search(query);
+  }, [query])
 
   console.log('render')
   return (
     <div>
       <div className="row">
         <div className="col">
-          <SearchForm onSearch={search} />
+          <SearchForm onSearch={setQuery} />
         </div>
       </div>
       <div className="row">
         <div className="col">
           {loading && <p className="alert alert-info">Loading...</p>}
           {error && <p className="alert alert-danger">{error}</p>}
+          {query && <p>Results for "{query}"</p>}
           <SearchResults results={results} />
         </div>
       </div>
