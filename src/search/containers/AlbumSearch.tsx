@@ -1,6 +1,7 @@
 
 // tsrafc
 import React, { useEffect, useState } from 'react'
+import { useSearchRequest } from '../../core/hooks/useSearchRequest'
 import { Album } from '../../core/model/Album'
 import { albumSearch } from '../../core/services'
 import { SearchForm } from '../components/SearchForm'
@@ -8,38 +9,19 @@ import { SearchResults } from '../components/SearchResults'
 
 interface Props { }
 
-
 export const AlbumSearch = () => {
-  const [query, setQuery] = useState('batman')
-  const [error, setError] = useState<Error | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<Album[]>([])
 
-  const search = async (query: string) => {
-    try {
-      setError(null)
-      setLoading(true)
-      setResults([])
-      const results = await albumSearch.searchAlbums(query)
-      setResults(results)
-      setLoading(false)
-    } catch (error) {
-      setError(error?.message)
-      setLoading(false)
-    }
-  }
+  const {
+    setQuery, error, loading, query, results
+  } = useSearchRequest((query: string) => albumSearch.searchAlbums(query))
 
-  useEffect(() => {
-    console.log('useEffect', query)
-    search(query);
-  }, [query])
+  useEffect(() => { setQuery('batman') }, [])
 
-  console.log('render')
   return (
     <div>
       <div className="row">
         <div className="col">
-          <SearchForm onSearch={setQuery} query={query} />
+          <SearchForm onSearch={setQuery} query={query || ''} />
         </div>
       </div>
       <div className="row">
@@ -47,7 +29,7 @@ export const AlbumSearch = () => {
           {loading && <p className="alert alert-info">Loading...</p>}
           {error && <p className="alert alert-danger">{error}</p>}
           {query && <p onClick={() => setQuery('')}>Results for "{query}"</p>}
-          <SearchResults results={results} />
+          {results && <SearchResults results={results} />}
         </div>
       </div>
     </div>
