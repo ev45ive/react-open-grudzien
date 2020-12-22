@@ -6,19 +6,28 @@ interface Props {
   onSearch(query: string): void
 }
 
-export const SearchForm = ({ 
-  onSearch, 
-  query: parentQuery 
+export const SearchForm = ({
+  onSearch,
+  query: parentQuery
 }: Props) => {
-
-  // const parentQuery = props.query
-  // const {query:parentQuery} = props
-
   const [query, setQuery] = useState(parentQuery)
 
   useEffect(() => {
     setQuery(parentQuery)
   }, [parentQuery])
+
+  useEffect(() => {
+    console.log('start timeout')
+    
+    const handler = setTimeout(() => {
+      onSearch(query)
+    }, 400)
+
+    return () => {
+      clearTimeout(handler)
+      console.log('end timeout')
+    }
+  }, [query])
 
   const search = (query: string) => { onSearch(query) }
 
