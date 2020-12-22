@@ -8,11 +8,15 @@ export class AlbumSearchService {
 
 
   async searchAlbums(query: string) {
+    
+    const cancelToken = new axios.CancelToken(cancel => { })
+
     const res = await axios.get<AlbumsSearchResponse>('search', {
       params: {
         type: 'album',
         q: query
       },
+      cancelToken
     });
     return res.data.albums.items;
 
