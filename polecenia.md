@@ -5,6 +5,8 @@ cd react-open-grudzien
 npm i 
 npm start
 
+# Cwiczenia
+git stash -u -m "moje zadanie" & git pull -f
 
 # Instalacje
 node -v
