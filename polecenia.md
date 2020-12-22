@@ -31,3 +31,11 @@ https://react.semantic-ui.com/
 https://ant.design/
 https://react-bootstrap.github.io/components/alerts
 
+# Axios
+npm i axios
+
+# Oauth Client 
+
+# React router
+npm install react-router-dom @types/react-router-dom
+yarn add react-router-dom @types/react-router-dom

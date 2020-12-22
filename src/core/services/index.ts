@@ -12,6 +12,7 @@ export const authservice = new AuthService({
     // show_dialog: 'true'
   }
 })
+authservice.init()
 
 axios.defaults.baseURL = 'https://api.spotify.com/v1/'
 
@@ -39,5 +40,3 @@ axios.interceptors.response.use(config => config, (error: AxiosError) => {
 
 
 export const albumSearch = new AlbumSearchService()
-
-authservice.init()

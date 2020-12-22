@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 
-export function useSearchRequest<Params, Results>(getResults: (query: Params) => Promise<Results>) {
+export function useSearchRequest<Params, Results>(
+  getResults: (query: Params) => Promise<Results>
+) {
   const [query, setQuery] = useState<Params | null>(null)
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
