@@ -15,32 +15,6 @@ const results: Pick<Album, 'id' | 'name' | 'images'>[] = [
   { id: '456', name: 'Album 456', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/350/350' }] },
 ]
 
-// type PartialAlbum = Album | Track | undefined
-// type PartialAlbum = {
-//   id: Album['id'],
-//   name: Album['name'],
-// }
-
-// type PartialAlbum = {
-//   [k: string]: Album['id'],
-// }
-
-// type PartialAlbum = {
-//   [k in 'id' | 'name' | 'images']: Album[k]
-// }
-
-// type Pick<T, K extends keyof T> = {
-//   [k in K]: T[k]
-// }
-
-// type Mock = Pick<Album, 'id' | 'name' | 'images'>
-
-// type Partial<T> = {
-//   [k in keyof T]?: T[k]
-// }
-
-
-
 export const AlbumSearch = (props: Props) => {
   return (
     <div>
