@@ -1,6 +1,6 @@
 
 // tsrafc
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Album } from '../../core/model/Album'
 import { albumSearch } from '../../core/services'
 import { SearchForm } from '../components/SearchForm'
@@ -14,7 +14,6 @@ export const AlbumSearch = () => {
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Album[]>([])
-
 
   const search = async (query: string) => {
     try {
@@ -31,9 +30,17 @@ export const AlbumSearch = () => {
     }
   }
 
+  useEffect(() => {
+    // search(query);
+    console.log('useEffect', query)
+  }, [])
+  // })// after EACH render
+  // },[])// after FIRST render
+  // },[x,y])// after render when x or y Changed
+
+  console.log('render')
   return (
     <div>
-      {/* .row*2>.col */}
       <div className="row">
         <div className="col">
           <SearchForm onSearch={search} />
