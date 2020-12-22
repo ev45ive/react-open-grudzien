@@ -88,7 +88,7 @@ export default class PlaylistsView extends Component<Props, State> {
           </div>
           <div className="col">
 
-            {this.state.selected && <div>
+            {this.state.selected && <> {/* <> == <React.Fragment> */}
 
               {this.state.mode === 'details' &&
                 <PlaylistDetails playlist={this.state.selected} onEdit={this.edit} />}
@@ -96,7 +96,7 @@ export default class PlaylistsView extends Component<Props, State> {
               {this.state.mode === 'edit' &&
                 <PlaylistForm playlist={this.state.selected} onCancel={this.cancel/* () => this.cancel() - NOT PURE */} onSave={this.save} />}
 
-            </div>}
+            </>}
 
 
             {!this.state.selected && <p>Please select playlist</p>}
