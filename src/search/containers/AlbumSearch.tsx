@@ -8,7 +8,7 @@ import { SearchResults } from '../components/SearchResults'
 interface Props { }
 
 
-const results: Pick<Album, 'id' | 'name' | 'images'>[] = [
+const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
   { id: '123', name: 'Album 123', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/300/300' }] },
   { id: '234', name: 'Album 234', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/400/400' }] },
   { id: '345', name: 'Album 345', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/500/500' }] },
@@ -16,6 +16,8 @@ const results: Pick<Album, 'id' | 'name' | 'images'>[] = [
 ]
 
 export const AlbumSearch = (props: Props) => {
+  const results = albumsMock  as unknown as Album[]
+  
   return (
     <div>
       {/* .row*2>.col */}
@@ -26,7 +28,7 @@ export const AlbumSearch = (props: Props) => {
       </div>
       <div className="row">
         <div className="col">
-          <SearchResults />
+          <SearchResults results={results} />
         </div>
       </div>
     </div>
