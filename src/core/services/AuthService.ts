@@ -5,15 +5,15 @@ export class AuthService {
   token: oauth2.Token | null = null;
   autologin = true
   client: oauth2;
-  
+
   constructor(options: oauth2.Options) {
     this.client = new oauth2(options)
   }
-  
+
   getToken() {
     return this.token?.accessToken
   }
-  
+
   async init() {
     try {
       const rawToken = sessionStorage.getItem('token')
@@ -30,8 +30,8 @@ export class AuthService {
     }
   }
 
-  authorize() {
-    const url = this.client.token.getUri({})
+  authorize(redirectUrl = '') {
+    const url = this.client.token.getUri({ state: redirectUrl })
     window.location.href = (url)
   }
 

@@ -23,6 +23,12 @@ axios.interceptors.request.use((config) => {
 
 axios.interceptors.response.use(config => config, (error: AxiosError) => {
   if ((error).isAxiosError && error.response?.data?.error?.message) {
+    if(error.response.status === 401){
+      authservice.authorize()
+      // Retry request after new token:
+      // .then().. error.config.headers... return config; 
+    }
+
     return Promise.reject(new Error(error.response.data.error.message))
   } else {
     console.error(error)

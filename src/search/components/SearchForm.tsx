@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 interface Props {
   query: string
@@ -12,21 +12,14 @@ export const SearchForm = ({
 }: Props) => {
   const [query, setQuery] = useState(parentQuery)
 
-  useEffect(() => {
-    setQuery(parentQuery)
-  }, [parentQuery])
+  const inputRef = useRef<HTMLInputElement>(null)
+  useEffect(() => { inputRef.current?.focus() }, [])
+
+  useEffect(() => { setQuery(parentQuery) }, [parentQuery])
 
   useEffect(() => {
-    console.log('start timeout')
-    
-    const handler = setTimeout(() => {
-      onSearch(query)
-    }, 400)
-
-    return () => {
-      clearTimeout(handler)
-      console.log('end timeout')
-    }
+    const handler = setTimeout(() => onSearch(query), 400)
+    return () => clearTimeout(handler)
   }, [query])
 
   const search = (query: string) => { onSearch(query) }
@@ -34,7 +27,7 @@ export const SearchForm = ({
   return (
     <div>
       <div className="input-group mb-3">
-        <input type="text" className="form-control" placeholder="Search Albums"
+        <input type="text" className="form-control" placeholder="Search Albums" ref={inputRef}
           value={query}
           onChange={e => setQuery(e.target.value)} />
 
