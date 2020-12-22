@@ -2,33 +2,31 @@
 // tsrafc
 import React, { useState } from 'react'
 import { Album } from '../../core/model/Album'
+import { albumSearch } from '../../core/services'
+import { AlbumSearchService } from '../../core/services/AlbumSearchService'
 import { SearchForm } from '../components/SearchForm'
 import { SearchResults } from '../components/SearchResults'
 
 interface Props { }
 
 
-const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
-  { id: '123', name: 'Album 123', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/300/300' }] },
-  { id: '234', name: 'Album 234', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/400/400' }] },
-  { id: '345', name: 'Album 345', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/500/500' }] },
-  { id: '456', name: 'Album 456', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/350/350' }] },
-]
 
 export const AlbumSearch = (props: Props) => {
   const [query, setQuery] = useState('batman')
+  const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Album[]>([])
 
 
-  const search = (query: string) => {
-    console.log(query)
-    setQuery(query)
-    setLoading(true)
-    setTimeout(() => {
-      setResults(albumsMock as Album[])
+  const search = async (query: string) => {
+    try {
+      setError(null)
+      setQuery(query)
+      setLoading(true)
+      const results = await albumSearch.searchAlbums(query)
+      setResults(results)
       setLoading(false)
-    }, 1000)
+    } catch (error) { setError(error?.message) }
   }
 
   return (
@@ -42,6 +40,7 @@ export const AlbumSearch = (props: Props) => {
       <div className="row">
         <div className="col">
           {loading && <p className="alert alert-info">Loading...</p>}
+          {error && <p className="alert alert-danger">{error}</p>}
           <SearchResults results={results} />
         </div>
       </div>
