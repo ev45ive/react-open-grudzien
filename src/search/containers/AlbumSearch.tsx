@@ -17,7 +17,9 @@ const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
 
 export const AlbumSearch = (props: Props) => {
   // const results = albumsMock  as unknown as Album[]
-  const [query, setQuery] = useState('batman')
+  if(Math.random() > 0.5){
+    const [query, setQuery] = useState('batman')
+  }
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Album[]>(albumsMock as Album[])
 
