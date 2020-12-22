@@ -1,18 +1,17 @@
 import axios, { AxiosError } from "axios";
-import { Album } from "../model/Album";
 import { AlbumsSearchResponse } from "../model/Search";
-import { albumsMock } from "./albumsMock";
+import { AuthService } from "./AuthService";
 
 export class AlbumSearchService {
 
-  constructor() {
-
-  }
+  constructor(
+    private authservice: AuthService
+  ) { }
 
 
   searchAlbums(query: string) {
     return axios.get<AlbumsSearchResponse>('https://api.spotify.com/v1/search', {
-      headers: { Authorization: 'Bearer  Lubeiplacki' },
+      headers: { Authorization: 'Bearer ' + this.authservice.getToken() },
       params: {
         type: 'album',
         q: query
