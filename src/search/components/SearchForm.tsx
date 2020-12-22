@@ -6,21 +6,26 @@ interface Props {
   onSearch(query: string): void
 }
 
+const useDebounce = (callback: TimerHandler, deps: any[] = [], timeout = 400) => {
+  useEffect(() => {
+    const handler = setTimeout(callback, timeout)
+    return () => clearTimeout(handler)
+  }, deps)
+}
+
 export const SearchForm = ({
   onSearch,
   query: parentQuery
 }: Props) => {
   const [query, setQuery] = useState(parentQuery)
+  
+  useDebounce(() => onSearch(query), [query])
 
   const inputRef = useRef<HTMLInputElement>(null)
   useEffect(() => { inputRef.current?.focus() }, [])
 
   useEffect(() => { setQuery(parentQuery) }, [parentQuery])
 
-  useEffect(() => {
-    const handler = setTimeout(() => onSearch(query), 400)
-    return () => clearTimeout(handler)
-  }, [query])
 
   const search = (query: string) => { onSearch(query) }
 
