@@ -12,7 +12,7 @@ export class AlbumSearchService {
 
   searchAlbums(query: string) {
     return axios.get<AlbumsSearchResponse>('https://api.spotify.com/v1/search', {
-      headers: {},
+      headers: { Authorization: 'Bearer  Lubeiplacki' },
       params: {
         type: 'album',
         q: query
