@@ -1,14 +1,20 @@
 import React from 'react';
+import { Album } from '../../core/model/Album';
 
 export interface Props {
+  album: Album
 }
 
-export const AlbumCard = (props: Props) => {
+export const AlbumCard = ({ album }: Props) => {
   return (
     <div className="card">
-      <img src="https://www.placecage.com/c/200/300" className="card-img-top" />
+      
+      <img src={album.images[0].url} className="card-img-top" />
+
       <div className="card-body">
-        <h5 className="card-title">Card title</h5>
+        <h5 className="card-title">
+          {album.name}
+        </h5>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 
 import { Field, FieldHelperProps, FieldInputProps, Formik, FormikHelpers } from 'formik'
 import React, { Component, PureComponent } from 'react'
+import { setSourceMapRange } from 'typescript'
 import { Playlist } from '../../core/model/Playlist'
 
 interface Props {
@@ -17,6 +18,12 @@ interface State {
 export default class PlaylistForm extends PureComponent<Props, State> {
   state: State = {}
   nameInputRef = React.createRef<HTMLInputElement>()
+
+  constructor(props: Props) {
+    super(props)
+
+    // super.render()
+  }
 
   componentDidMount() {
     if (this.nameInputRef.current) {
