@@ -5,9 +5,9 @@ interface Props {
   onSearch(query: string): void
 }
 
-
 export const SearchForm = ({onSearch}: Props) => {
-  const [query, setQuery] = useState('batman')
+
+  const [query, setQuery] = useState('')
 
   const search = (query: string) => { onSearch(query) }
 
