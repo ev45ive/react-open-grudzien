@@ -1,12 +1,7 @@
+import axios from "axios";
 import { Album } from "../model/Album";
-
-const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
-  { id: '123', name: 'Album 123', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/300/300' }] },
-  { id: '234', name: 'Album 234', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/400/400' }] },
-  { id: '345', name: 'Album 345', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/500/500' }] },
-  { id: '456', name: 'Album 456', images: [{ height: 300, width: 300, url: 'https://www.placecage.com/c/350/350' }] },
-]
-
+import { AlbumsSearchResponse } from "../model/Search";
+import { albumsMock } from "./albumsMock";
 
 export class AlbumSearchService {
 
@@ -16,11 +11,21 @@ export class AlbumSearchService {
 
 
   searchAlbums(query: string) {
-
-    return new Promise<Album[]>((resolve) => {
-      setTimeout(() => {
-        resolve(albumsMock as Album[])
-      }, 1000)
-    })
+    return axios.get<AlbumsSearchResponse>('https://api.spotify.com/v1/search', {
+      headers: {},
+      params: {
+        type: 'album', 
+        q: query
+      },
+    }).then(res => res.data.albums.items)
   }
+
+
+  // searchAlbums(query: string) {
+  //   return new Promise<Album[]>((resolve) => {
+  //     setTimeout(() => {
+  //       resolve(albumsMock as Album[])
+  //     }, 1000)
+  //   })
+  // }
 }
