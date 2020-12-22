@@ -39,14 +39,14 @@ export const AlbumSearch = () => {
     <div>
       <div className="row">
         <div className="col">
-          <SearchForm onSearch={setQuery} />
+          <SearchForm onSearch={setQuery} query={query} />
         </div>
       </div>
       <div className="row">
         <div className="col">
           {loading && <p className="alert alert-info">Loading...</p>}
           {error && <p className="alert alert-danger">{error}</p>}
-          {query && <p>Results for "{query}"</p>}
+          {query && <p onClick={() => setQuery('')}>Results for "{query}"</p>}
           <SearchResults results={results} />
         </div>
       </div>
