@@ -17,7 +17,7 @@ const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
 
 export const AlbumSearch = (props: Props) => {
   const [query, setQuery] = useState('batman')
-  const [loading, setLoading] = useState({ active: false })
+  const [loading, setLoading] = useState(false)
   const [results, setResults] = useState<Album[]>(albumsMock as Album[])
 
   return (
@@ -26,17 +26,11 @@ export const AlbumSearch = (props: Props) => {
       <div className="row">
         <div className="col">
           <SearchForm />
-          <button onClick={() => setQuery(Date())}>qeury</button>
-          <button onClick={() => {
-            loading.active = !loading.active;
-            // setLoading(loading) //  Muutable - doesnt rerender
-            setLoading({...loading}) // Copy - immutable - rerenders
-          }}>Loading</button>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          {loading.active && <p>Loading...</p>}
+          {loading && <p>Loading...</p>}
           <SearchResults results={results} />
         </div>
       </div>
