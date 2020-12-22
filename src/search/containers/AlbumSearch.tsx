@@ -1,12 +1,15 @@
 
 // tsrafc
 import React from 'react'
+import { Album } from '../../core/model/Album'
 import { SearchForm } from '../components/SearchForm'
 import { SearchResults } from '../components/SearchResults'
 
-interface Props {
-  
-}
+interface Props {}
+
+
+const results:Album[] = []
+
 
 export const AlbumSearch = (props: Props) => {
   return (
