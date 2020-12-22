@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import PlaylistsView from './playlists/containers/PlaylistsView';
+import { AlbumSearch } from './search/containers/AlbumSearch';
 
 
 class App extends React.Component {
@@ -15,7 +16,8 @@ class App extends React.Component {
             <div className="col">
               <h1>Hello React</h1>
 
-              <PlaylistsView />
+              {/* <PlaylistsView /> */}
+              <AlbumSearch/>
             </div>
           </div>
         </div>

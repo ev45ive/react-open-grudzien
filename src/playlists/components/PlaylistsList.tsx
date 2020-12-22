@@ -8,19 +8,13 @@ interface Props {
   selected?: Playlist['id'] | null
 }
 
-interface State {
-}
-
-export default class PlaylistsList extends PureComponent<Props, State> {
-  state: State = {}
+export default class PlaylistsList extends PureComponent<Props, {}> {
 
   select = (selected: Playlist['id']) => {
-    // this.setState({ selected })
     this.props.onSelected(selected)
   }
 
   render() {
-
     return (
       <div>
         <div className="list-group">
