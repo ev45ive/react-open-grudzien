@@ -1,6 +1,6 @@
 
 // tsrafc
-import React from 'react'
+import React, { useState } from 'react'
 import { Album } from '../../core/model/Album'
 import { SearchForm } from '../components/SearchForm'
 import { SearchResults } from '../components/SearchResults'
@@ -16,18 +16,23 @@ const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
 ]
 
 export const AlbumSearch = (props: Props) => {
-  const results = albumsMock  as unknown as Album[]
-  
+  // const results = albumsMock  as unknown as Album[]
+  const [query, setQuery] = useState('batman')
+  const [loading, setLoading] = useState(false)
+  const [results, setResults] = useState<Album[]>(albumsMock as Album[])
+
   return (
     <div>
       {/* .row*2>.col */}
       <div className="row">
         <div className="col">
           <SearchForm />
+          <button onClick={() => setLoading(!loading)}>Loading</button>
         </div>
       </div>
       <div className="row">
         <div className="col">
+          {loading && <p>Loading...</p>}
           <SearchResults results={results} />
         </div>
       </div>

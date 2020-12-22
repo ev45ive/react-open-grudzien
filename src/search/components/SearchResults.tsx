@@ -12,8 +12,8 @@ export const SearchResults = ({ results }: Props) => {
   return (
     <div>
       <div className="row row-cols-1 row-cols-md-4 g-0">
-        {results.map((album) => <div className="col">
-          <AlbumCard album={album} key={album.id} />
+        {results.map((album) => <div className="col"  key={album.id} >
+          <AlbumCard album={album}/>
         </div>
         )}
 
