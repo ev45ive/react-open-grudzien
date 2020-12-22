@@ -20,3 +20,13 @@ export interface ExternalIDS {
 }
 
 
+
+interface Vector { x: number; y: number, length: number }
+interface Point { x: number; y: number }
+
+let v: Vector = { x: 23, y: 34, length: 123 }
+let p: Point = { x: 23, y: 34 }
+
+// v = p // Property 'length' is missing in type 'Point' but required in type 'Vector' 
+p = v  // OK
+
