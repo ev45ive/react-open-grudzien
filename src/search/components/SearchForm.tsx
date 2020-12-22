@@ -2,15 +2,14 @@
 import React, { useState } from 'react'
 
 interface Props {
-
+  onSearch(query: string): void
 }
 
 
-export const SearchForm = (props: Props) => {
-
+export const SearchForm = ({onSearch}: Props) => {
   const [query, setQuery] = useState('batman')
 
-  const search = (query: string) => { console.log(query) }
+  const search = (query: string) => { onSearch(query) }
 
   return (
     <div>
@@ -19,7 +18,8 @@ export const SearchForm = (props: Props) => {
           value={query}
           onChange={e => setQuery(e.target.value)} />
 
-        <button className="btn btn-outline-secondary" onClick={() => search(query)}>Search</button>
+        <button className="btn btn-outline-secondary" 
+          onClick={() => search(query)}>Search</button>
       </div>
     </div>
   )

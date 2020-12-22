@@ -18,19 +18,30 @@ const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
 export const AlbumSearch = (props: Props) => {
   const [query, setQuery] = useState('batman')
   const [loading, setLoading] = useState(false)
-  const [results, setResults] = useState<Album[]>(albumsMock as Album[])
+  const [results, setResults] = useState<Album[]>([])
+
+
+  const search = (query: string) => {
+    console.log(query)
+    setQuery(query)
+    setLoading(true)
+    setTimeout(() => {
+      setResults(albumsMock as Album[])
+      setLoading(false)
+    }, 1000)
+  }
 
   return (
     <div>
       {/* .row*2>.col */}
       <div className="row">
         <div className="col">
-          <SearchForm />
+          <SearchForm onSearch={search} />
         </div>
       </div>
       <div className="row">
         <div className="col">
-          {loading && <p>Loading...</p>}
+          {loading && <p className="alert alert-info">Loading...</p>}
           <SearchResults results={results} />
         </div>
       </div>
