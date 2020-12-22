@@ -26,7 +26,10 @@ export const AlbumSearch = (props: Props) => {
       const results = await albumSearch.searchAlbums(query)
       setResults(results)
       setLoading(false)
-    } catch (error) { setError(error?.message) }
+    } catch (error) {
+      setError(error?.message)
+      setLoading(false)
+    }
   }
 
   return (

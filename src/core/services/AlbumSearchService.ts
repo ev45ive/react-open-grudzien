@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { Album } from "../model/Album";
 import { AlbumsSearchResponse } from "../model/Search";
 import { albumsMock } from "./albumsMock";
@@ -14,10 +14,19 @@ export class AlbumSearchService {
     return axios.get<AlbumsSearchResponse>('https://api.spotify.com/v1/search', {
       headers: {},
       params: {
-        type: 'album', 
+        type: 'album',
         q: query
       },
-    }).then(res => res.data.albums.items)
+    })
+      .then(res => res.data.albums.items)
+      .catch((error: AxiosError) => {
+        if ((error).isAxiosError && error.response?.data?.error?.message) {
+          return Promise.reject(new Error(error.response.data.error.message))
+        } else {
+          console.error(error)
+          return Promise.reject(new Error('Unexpected error'))
+        }
+      })
   }
 
 
