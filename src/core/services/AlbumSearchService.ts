@@ -4,28 +4,18 @@ import { AuthService } from "./AuthService";
 
 export class AlbumSearchService {
 
-  constructor(
-    private authservice: AuthService
-  ) { }
+  constructor() { }
 
 
-  searchAlbums(query: string) {
-    return axios.get<AlbumsSearchResponse>('https://api.spotify.com/v1/search', {
-      headers: { Authorization: 'Bearer ' + this.authservice.getToken() },
+  async searchAlbums(query: string) {
+    const res = await axios.get<AlbumsSearchResponse>('search', {
       params: {
         type: 'album',
         q: query
       },
-    })
-      .then(res => res.data.albums.items)
-      .catch((error: AxiosError) => {
-        if ((error).isAxiosError && error.response?.data?.error?.message) {
-          return Promise.reject(new Error(error.response.data.error.message))
-        } else {
-          console.error(error)
-          return Promise.reject(new Error('Unexpected error'))
-        }
-      })
+    });
+    return res.data.albums.items;
+
   }
 
 

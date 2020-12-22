@@ -3,15 +3,13 @@
 import React, { useState } from 'react'
 import { Album } from '../../core/model/Album'
 import { albumSearch } from '../../core/services'
-import { AlbumSearchService } from '../../core/services/AlbumSearchService'
 import { SearchForm } from '../components/SearchForm'
 import { SearchResults } from '../components/SearchResults'
 
 interface Props { }
 
 
-
-export const AlbumSearch = (props: Props) => {
+export const AlbumSearch = () => {
   const [query, setQuery] = useState('batman')
   const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState(false)
@@ -23,6 +21,7 @@ export const AlbumSearch = (props: Props) => {
       setError(null)
       setQuery(query)
       setLoading(true)
+      setResults([])
       const results = await albumSearch.searchAlbums(query)
       setResults(results)
       setLoading(false)
