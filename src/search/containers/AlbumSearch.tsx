@@ -16,11 +16,8 @@ const albumsMock: Pick<Album, 'id' | 'name' | 'images'>[] = [
 ]
 
 export const AlbumSearch = (props: Props) => {
-  // const results = albumsMock  as unknown as Album[]
-  if(Math.random() > 0.5){
-    const [query, setQuery] = useState('batman')
-  }
-  const [loading, setLoading] = useState(false)
+  const [query, setQuery] = useState('batman')
+  const [loading, setLoading] = useState({ active: false })
   const [results, setResults] = useState<Album[]>(albumsMock as Album[])
 
   return (
@@ -29,12 +26,17 @@ export const AlbumSearch = (props: Props) => {
       <div className="row">
         <div className="col">
           <SearchForm />
-          <button onClick={() => setLoading(!loading)}>Loading</button>
+          <button onClick={() => setQuery(Date())}>qeury</button>
+          <button onClick={() => {
+            loading.active = !loading.active;
+            // setLoading(loading) //  Muutable - doesnt rerender
+            setLoading({...loading}) // Copy - immutable - rerenders
+          }}>Loading</button>
         </div>
       </div>
       <div className="row">
         <div className="col">
-          {loading && <p>Loading...</p>}
+          {loading.active && <p>Loading...</p>}
           <SearchResults results={results} />
         </div>
       </div>
